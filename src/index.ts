@@ -344,3 +344,4 @@ class Schema {
 }
 
 export default Schema;
+export * from './interface';
