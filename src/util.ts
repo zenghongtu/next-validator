@@ -10,7 +10,7 @@ import {
   Value,
 } from './interface';
 
-const formatRegExp = /%[sdj%]/g;
+// const formatRegExp = /%[sdj%]/g;
 
 export let warning: (type: string, errors: SyncErrorType[]) => void = () => {};
 
@@ -24,7 +24,7 @@ if (
 ) {
   warning = (type, errors) => {
     if (typeof console !== 'undefined' && console.warn) {
-      if (errors.every(e => typeof e === 'string')) {
+      if (errors.every((e) => typeof e === 'string')) {
         console.warn(type, errors);
       }
     }
@@ -36,7 +36,7 @@ export function convertFieldsError(
 ): Record<string, ValidateError[]> {
   if (!errors || !errors.length) return null;
   const fields = {};
-  errors.forEach(error => {
+  errors.forEach((error) => {
     const field = error.field;
     fields[field] = fields[field] || [];
     fields[field].push(error);
@@ -44,43 +44,43 @@ export function convertFieldsError(
   return fields;
 }
 
-export function format(
-  template: ((...args: any[]) => string) | string,
-  ...args: any[]
-): string {
-  let i = 0;
-  const len = args.length;
-  if (typeof template === 'function') {
-    return template.apply(null, args);
-  }
-  if (typeof template === 'string') {
-    let str = template.replace(formatRegExp, x => {
-      if (x === '%%') {
-        return '%';
-      }
-      if (i >= len) {
-        return x;
-      }
-      switch (x) {
-        case '%s':
-          return String(args[i++]);
-        case '%d':
-          return (Number(args[i++]) as unknown) as string;
-        case '%j':
-          try {
-            return JSON.stringify(args[i++]);
-          } catch (_) {
-            return '[Circular]';
-          }
-          break;
-        default:
-          return x;
-      }
-    });
-    return str;
-  }
-  return template;
-}
+// export function format(
+//   template: ((...args: any[]) => string) | string,
+//   ...args: any[]
+// ): string {
+//   let i = 0;
+//   const len = args.length;
+//   if (typeof template === 'function') {
+//     return template.apply(null, args);
+//   }
+//   if (typeof template === 'string') {
+//     let str = template.replace(formatRegExp, x => {
+//       if (x === '%%') {
+//         return '%';
+//       }
+//       if (i >= len) {
+//         return x;
+//       }
+//       switch (x) {
+//         case '%s':
+//           return String(args[i++]);
+//         case '%d':
+//           return (Number(args[i++]) as unknown) as string;
+//         case '%j':
+//           try {
+//             return JSON.stringify(args[i++]);
+//           } catch (_) {
+//             return '[Circular]';
+//           }
+//           break;
+//         default:
+//           return x;
+//       }
+//     });
+//     return str;
+//   }
+//   return template;
+// }
 
 function isNativeStringType(type: string) {
   return (
@@ -127,7 +127,7 @@ function asyncParallelArray(
     }
   }
 
-  arr.forEach(a => {
+  arr.forEach((a) => {
     func(a, count);
   });
 }
@@ -159,7 +159,7 @@ function asyncSerialArray(
 
 function flattenObjArr(objArr: Record<string, RuleValuePackage[]>) {
   const ret: RuleValuePackage[] = [];
-  Object.keys(objArr).forEach(k => {
+  Object.keys(objArr).forEach((k) => {
     ret.push(...(objArr[k] || []));
   });
   return ret;
@@ -201,7 +201,7 @@ export function asyncMap(
       const flattenArr = flattenObjArr(objArr);
       asyncSerialArray(flattenArr, func, next);
     });
-    pending.catch(e => e);
+    pending.catch((e) => e);
     return pending;
   }
   const firstFields =
@@ -230,7 +230,7 @@ export function asyncMap(
       callback(results);
       resolve();
     }
-    objArrKeys.forEach(key => {
+    objArrKeys.forEach((key) => {
       const arr = objArr[key];
       if (firstFields.indexOf(key) !== -1) {
         asyncSerialArray(arr, func, next);
@@ -239,7 +239,7 @@ export function asyncMap(
       }
     });
   });
-  pending.catch(e => e);
+  pending.catch((e) => e);
   return pending;
 }
 
@@ -258,7 +258,7 @@ export function complementError(rule: InternalRuleItem) {
 
     return {
       message: typeof oe === 'function' ? oe() : oe,
-      field: ((oe as unknown) as ValidateError).field || rule.fullField,
+      field: (oe as unknown as ValidateError).field || rule.fullField,
     };
   };
 }

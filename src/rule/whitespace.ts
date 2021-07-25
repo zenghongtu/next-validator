@@ -1,5 +1,5 @@
 import { ExecuteRule } from '../interface';
-import { format } from '../util';
+import { formatter } from '../formatter';
 
 /**
  *  Rule for validating whitespace.
@@ -14,7 +14,7 @@ import { format } from '../util';
  */
 const whitespace: ExecuteRule = (rule, value, source, errors, options) => {
   if (/^\s+$/.test(value) || value === '') {
-    errors.push(format(options.messages.whitespace, rule.fullField));
+    errors.push(formatter.format(options.messages.whitespace, rule));
   }
 };
 

@@ -1,52 +1,58 @@
 import { InternalValidateMessages } from './interface';
 
+const typeTemplate = "'${name}' is not a valid ${type}";
+
+export const defaultValidateMessages = {
+  default: "Validation error on field '${name}'",
+  required: "'${name}' is required",
+  enum: "'${name}' must be one of [${enum}]",
+  whitespace: "'${name}' cannot be empty",
+  date: {
+    format: "'${name}' is invalid for format date",
+    parse: "'${name}' could not be parsed as date",
+    invalid: "'${name}' is invalid date",
+  },
+  types: {
+    string: typeTemplate,
+    method: typeTemplate,
+    array: typeTemplate,
+    object: typeTemplate,
+    number: typeTemplate,
+    date: typeTemplate,
+    boolean: typeTemplate,
+    integer: typeTemplate,
+    float: typeTemplate,
+    regexp: typeTemplate,
+    email: typeTemplate,
+    url: typeTemplate,
+    hex: typeTemplate,
+  },
+  string: {
+    len: "'${name}' must be exactly ${len} characters",
+    min: "'${name}' must be at least ${min} characters",
+    max: "'${name}' cannot be longer than ${max} characters",
+    range: "'${name}' must be between ${min} and ${max} characters",
+  },
+  number: {
+    len: "'${name}' must equal ${len}",
+    min: "'${name}' cannot be less than ${min}",
+    max: "'${name}' cannot be greater than ${max}",
+    range: "'${name}' must be between ${min} and ${max}",
+  },
+  array: {
+    len: "'${name}' must be exactly ${len} in length",
+    min: "'${name}' cannot be less than ${min} in length",
+    max: "'${name}' cannot be greater than ${max} in length",
+    range: "'${name}' must be between ${min} and ${max} in length",
+  },
+  pattern: {
+    mismatch: "'${name}' does not match pattern ${pattern}",
+  },
+};
+
 export function newMessages(): InternalValidateMessages {
   return {
-    default: 'Validation error on field %s',
-    required: '%s is required',
-    enum: '%s must be one of %s',
-    whitespace: '%s cannot be empty',
-    date: {
-      format: '%s date %s is invalid for format %s',
-      parse: '%s date could not be parsed, %s is invalid ',
-      invalid: '%s date %s is invalid',
-    },
-    types: {
-      string: '%s is not a %s',
-      method: '%s is not a %s (function)',
-      array: '%s is not an %s',
-      object: '%s is not an %s',
-      number: '%s is not a %s',
-      date: '%s is not a %s',
-      boolean: '%s is not a %s',
-      integer: '%s is not an %s',
-      float: '%s is not a %s',
-      regexp: '%s is not a valid %s',
-      email: '%s is not a valid %s',
-      url: '%s is not a valid %s',
-      hex: '%s is not a valid %s',
-    },
-    string: {
-      len: '%s must be exactly %s characters',
-      min: '%s must be at least %s characters',
-      max: '%s cannot be longer than %s characters',
-      range: '%s must be between %s and %s characters',
-    },
-    number: {
-      len: '%s must equal %s',
-      min: '%s cannot be less than %s',
-      max: '%s cannot be greater than %s',
-      range: '%s must be between %s and %s',
-    },
-    array: {
-      len: '%s must be exactly %s in length',
-      min: '%s cannot be less than %s in length',
-      max: '%s cannot be greater than %s in length',
-      range: '%s must be between %s and %s in length',
-    },
-    pattern: {
-      mismatch: '%s value %s does not match pattern %s',
-    },
+    ...defaultValidateMessages,
     clone() {
       const cloned = JSON.parse(JSON.stringify(this));
       cloned.clone = this.clone;

@@ -29,6 +29,7 @@ export interface ValidateOption {
   firstFields?: boolean | string[];
 
   messages?: Partial<ValidateMessages>;
+  messageVariables?: MessageVariables;
 
   /** The name of rules need to be trigger. Will validate all rules if leave empty */
   keys?: string[];
@@ -74,6 +75,7 @@ export type Rule = RuleItem | RuleItem[];
 
 export type Rules = Record<string, Rule>;
 
+export type MessageVariables = Record<string, string>;
 /**
  *  Rule for validating a value exists in an enumerable list.
  *
@@ -114,7 +116,7 @@ export type ExecuteValidator = (
 ) => void;
 
 // >>>>> Message
-type ValidateMessage = string | (() => string);
+type ValidateMessage = string | ((...args: any[]) => string);
 
 export interface ValidateMessages {
   default?: ValidateMessage;

@@ -1,5 +1,5 @@
 import { ExecuteRule } from '../interface';
-import { format } from '../util';
+import { formatter } from '../formatter';
 
 const range: ExecuteRule = (rule, value, source, errors, options) => {
   const len = typeof rule.len === 'number';
@@ -34,16 +34,14 @@ const range: ExecuteRule = (rule, value, source, errors, options) => {
   }
   if (len) {
     if (val !== rule.len) {
-      errors.push(format(options.messages[key].len, rule.fullField, rule.len));
+      errors.push(formatter.format(options.messages[key].len, rule));
     }
   } else if (min && !max && val < rule.min) {
-    errors.push(format(options.messages[key].min, rule.fullField, rule.min));
+    errors.push(formatter.format(options.messages[key].min, rule));
   } else if (max && !min && val > rule.max) {
-    errors.push(format(options.messages[key].max, rule.fullField, rule.max));
+    errors.push(formatter.format(options.messages[key].max, rule));
   } else if (min && max && (val < rule.min || val > rule.max)) {
-    errors.push(
-      format(options.messages[key].range, rule.fullField, rule.min, rule.max),
-    );
+    errors.push(formatter.format(options.messages[key].range, rule));
   }
 };
 
