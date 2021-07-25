@@ -1,7 +1,7 @@
 import Schema from '../src/';
 
 describe('string', () => {
-  it('works for none require', done => {
+  it('works for none require', (done) => {
     new Schema({
       v: {
         type: 'string',
@@ -10,14 +10,14 @@ describe('string', () => {
       {
         v: '',
       },
-      errors => {
+      (errors) => {
         expect(errors).toBe(null);
         done();
       },
     );
   });
 
-  it('works for empty string', done => {
+  it('works for empty string', (done) => {
     new Schema({
       v: {
         required: true,
@@ -27,15 +27,15 @@ describe('string', () => {
       {
         v: '',
       },
-      errors => {
+      (errors) => {
         expect(errors.length).toBe(1);
-        expect(errors[0].message).toBe('v is required');
+        expect(errors[0].message).toBe(`'v' is required`);
         done();
       },
     );
   });
 
-  it('works for undefined string', done => {
+  it('works for undefined string', (done) => {
     new Schema({
       v: {
         required: true,
@@ -45,15 +45,15 @@ describe('string', () => {
       {
         v: undefined,
       },
-      errors => {
+      (errors) => {
         expect(errors.length).toBe(1);
-        expect(errors[0].message).toBe('v is required');
+        expect(errors[0].message).toBe(`'v' is required`);
         done();
       },
     );
   });
 
-  it('works for null string', done => {
+  it('works for null string', (done) => {
     new Schema({
       v: {
         required: true,
@@ -63,15 +63,15 @@ describe('string', () => {
       {
         v: null,
       },
-      errors => {
+      (errors) => {
         expect(errors.length).toBe(1);
-        expect(errors[0].message).toBe('v is required');
+        expect(errors[0].message).toBe(`'v' is required`);
         done();
       },
     );
   });
 
-  it('works for message', done => {
+  it('works for message', (done) => {
     new Schema({
       v: {
         required: true,
@@ -82,7 +82,7 @@ describe('string', () => {
       {
         v: null,
       },
-      errors => {
+      (errors) => {
         expect(errors.length).toBe(1);
         expect(errors[0].message).toBe('haha');
         done();
@@ -90,7 +90,7 @@ describe('string', () => {
     );
   });
 
-  it('works for none empty', done => {
+  it('works for none empty', (done) => {
     new Schema({
       v: {
         required: true,
@@ -101,14 +101,14 @@ describe('string', () => {
       {
         v: ' ',
       },
-      errors => {
+      (errors) => {
         expect(errors).toBe(null);
         done();
       },
     );
   });
 
-  it('works for whitespace empty', done => {
+  it('works for whitespace empty', (done) => {
     new Schema({
       v: {
         required: true,
@@ -120,7 +120,7 @@ describe('string', () => {
       {
         v: ' ',
       },
-      errors => {
+      (errors) => {
         expect(errors.length).toBe(1);
         expect(errors[0].message).toBe('haha');
         done();

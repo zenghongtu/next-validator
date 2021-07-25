@@ -1,6 +1,6 @@
 import Schema from '../src/';
 
-const testNoErrorsFor = value => done => {
+const testNoErrorsFor = (value) => (done) => {
   new Schema({
     v: {
       type: 'any',
@@ -9,14 +9,14 @@ const testNoErrorsFor = value => done => {
     {
       v: value,
     },
-    errors => {
+    (errors) => {
       expect(errors).toBe(null);
       done();
     },
   );
 };
 
-const testRequiredErrorFor = value => done => {
+const testRequiredErrorFor = (value) => (done) => {
   new Schema({
     v: {
       required: true,
@@ -26,9 +26,9 @@ const testRequiredErrorFor = value => done => {
     {
       v: value,
     },
-    errors => {
+    (errors) => {
       expect(errors.length).toBe(1);
-      expect(errors[0].message).toBe('v is required');
+      expect(errors[0].message).toBe(`'v' is required`);
       done();
     },
   );

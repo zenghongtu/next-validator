@@ -1,10 +1,10 @@
 import Schema from '../src/';
 
 describe('messages', () => {
-  it('can call messages', done => {
+  it('can call messages', (done) => {
     const messages = {
       required(f) {
-        return `${f} required!`;
+        return `${f.field} required!`;
       },
     };
     const schema = new Schema({
@@ -21,20 +21,20 @@ describe('messages', () => {
         v: '',
         v2: '1',
       },
-      errors => {
+      (errors) => {
         expect(errors.length).toBe(2);
-        expect(errors[0].message).toBe('v required!');
-        expect(errors[1].message).toBe('v2 is not an array');
+        expect(errors[0].message).toBe(`v required!`);
+        expect(errors[1].message).toBe(`'v2' is not a valid array`);
         expect(Object.keys(messages).length).toBe(1);
         done();
       },
     );
   });
 
-  it('can use options.messages', done => {
+  it('can use options.messages', (done) => {
     const messages = {
-      required(f) {
-        return `${f} required!`;
+      required(rule) {
+        return `${rule.field} required!`;
       },
     };
     const schema = new Schema({
@@ -53,19 +53,20 @@ describe('messages', () => {
       {
         messages,
       },
-      errors => {
+      (errors) => {
+        console.log('errors: ', errors);
         expect(errors.length).toBe(2);
         expect(errors[0].message).toBe('v required!');
-        expect(errors[1].message).toBe('v2 is not an array');
+        expect(errors[1].message).toBe(`'v2' is not a valid array`);
         expect(Object.keys(messages).length).toBe(1);
         done();
       },
     );
   });
 
-  it('messages with parameters', done => {
+  it('messages with parameters', (done) => {
     const messages = {
-      required: 'Field %s required!',
+      required: 'Field ${name} required!',
     };
     const schema = new Schema({
       v: {
@@ -77,7 +78,8 @@ describe('messages', () => {
       {
         v: '',
       },
-      errors => {
+      (errors) => {
+        console.log('errors: ', errors);
         expect(errors).toBeTruthy();
         expect(errors.length).toBe(1);
         expect(errors[0].message).toBe('Field v required!');
@@ -87,7 +89,7 @@ describe('messages', () => {
     );
   });
 
-  it('messages can be without parameters', done => {
+  it('messages can be without parameters', (done) => {
     const messages = {
       required: 'required!',
     };
@@ -101,7 +103,7 @@ describe('messages', () => {
       {
         v: '',
       },
-      errors => {
+      (errors) => {
         expect(errors).toBeTruthy();
         expect(errors.length).toBe(1);
         expect(errors[0].message).toBe('required!');
@@ -112,7 +114,7 @@ describe('messages', () => {
     );
   });
 
-  it('message can be object', done => {
+  it('message can be object', (done) => {
     const atom = {};
     const messages = {
       required: atom,
@@ -129,7 +131,7 @@ describe('messages', () => {
       {
         messages,
       },
-      errors => {
+      (errors) => {
         expect(errors).toBeTruthy();
         expect(errors.length).toBe(1);
         expect(errors[0].message).toBe(atom);
@@ -140,7 +142,7 @@ describe('messages', () => {
     );
   });
 
-  it('message can be a function', done => {
+  it('message can be a function', (done) => {
     const message = 'this is a function';
     new Schema({
       v: {
@@ -151,7 +153,7 @@ describe('messages', () => {
       {
         v: '', // provide empty value, this will trigger the message.
       },
-      errors => {
+      (errors) => {
         expect(errors).toBeTruthy();
         expect(errors.length).toBe(1);
         expect(errors[0].message).toBe(message);

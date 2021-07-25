@@ -1,7 +1,7 @@
 import Schema from '../src/';
 
 describe('url', () => {
-  it('works for empty string', done => {
+  it('works for empty string', (done) => {
     new Schema({
       v: {
         type: 'url',
@@ -10,14 +10,14 @@ describe('url', () => {
       {
         v: '',
       },
-      errors => {
+      (errors) => {
         expect(errors).toBe(null);
         done();
       },
     );
   });
 
-  it('works for ip url', done => {
+  it('works for ip url', (done) => {
     new Schema({
       v: {
         type: 'url',
@@ -26,14 +26,14 @@ describe('url', () => {
       {
         v: 'http://10.218.136.29/talent-tree/src/index.html',
       },
-      errors => {
+      (errors) => {
         expect(errors).toBe(null);
         done();
       },
     );
   });
 
-  it('works for required empty string', done => {
+  it('works for required empty string', (done) => {
     new Schema({
       v: {
         type: 'url',
@@ -43,15 +43,15 @@ describe('url', () => {
       {
         v: '',
       },
-      errors => {
+      (errors) => {
         expect(errors.length).toBe(1);
-        expect(errors[0].message).toBe('v is required');
+        expect(errors[0].message).toBe(`'v' is required`);
         done();
       },
     );
   });
 
-  it('works for type url', done => {
+  it('works for type url', (done) => {
     new Schema({
       v: {
         type: 'url',
@@ -60,14 +60,14 @@ describe('url', () => {
       {
         v: 'http://www.taobao.com',
       },
-      errors => {
+      (errors) => {
         expect(errors).toBe(null);
         done();
       },
     );
   });
 
-  it('works for type url has query', done => {
+  it('works for type url has query', (done) => {
     new Schema({
       v: {
         type: 'url',
@@ -76,14 +76,14 @@ describe('url', () => {
       {
         v: 'http://www.taobao.com/abc?a=a',
       },
-      errors => {
+      (errors) => {
         expect(errors).toBe(null);
         done();
       },
     );
   });
 
-  it('works for type url has hash', done => {
+  it('works for type url has hash', (done) => {
     new Schema({
       v: {
         type: 'url',
@@ -92,14 +92,14 @@ describe('url', () => {
       {
         v: 'http://www.taobao.com/abc#!abc',
       },
-      errors => {
+      (errors) => {
         expect(errors).toBe(null);
         done();
       },
     );
   });
 
-  it('works for type url has query and has', done => {
+  it('works for type url has query and has', (done) => {
     new Schema({
       v: {
         type: 'url',
@@ -108,14 +108,14 @@ describe('url', () => {
       {
         v: 'http://www.taobao.com/abc?abc=%23&b=a~c#abc',
       },
-      errors => {
+      (errors) => {
         expect(errors).toBe(null);
         done();
       },
     );
   });
 
-  it('works for type url has multi hyphen', done => {
+  it('works for type url has multi hyphen', (done) => {
     new Schema({
       v: {
         type: 'url',
@@ -124,14 +124,14 @@ describe('url', () => {
       {
         v: 'https://www.tao---bao.com',
       },
-      errors => {
+      (errors) => {
         expect(errors).toBe(null);
         done();
       },
     );
   });
 
-  it('works for type not a valid url', done => {
+  it('works for type not a valid url', (done) => {
     new Schema({
       v: {
         type: 'url',
@@ -140,15 +140,15 @@ describe('url', () => {
       {
         v: 'http://www.taobao.com/abc?abc=%23&b=  a~c#abc    ',
       },
-      errors => {
+      (errors) => {
         expect(errors.length).toBe(1);
-        expect(errors[0].message).toBe('v is not a valid url');
+        expect(errors[0].message).toBe(`'v' is not a valid url`);
         done();
       },
     );
   });
 
-  it('support skip schema', done => {
+  it('support skip schema', (done) => {
     new Schema({
       v: {
         type: 'url',
@@ -157,7 +157,7 @@ describe('url', () => {
       {
         v: '//g.cn',
       },
-      errors => {
+      (errors) => {
         expect(errors).toBe(null);
         done();
       },

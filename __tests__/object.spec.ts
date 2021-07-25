@@ -1,7 +1,7 @@
 import Schema from '../src/';
 
 describe('object', () => {
-  it('works for the required object with fields in case of empty string', done => {
+  it('works for the required object with fields in case of empty string', (done) => {
     new Schema({
       v: {
         type: 'object',
@@ -12,9 +12,9 @@ describe('object', () => {
       {
         v: '',
       },
-      errors => {
+      (errors) => {
         expect(errors.length).toBe(1);
-        expect(errors[0].message).toBe('v is not an object');
+        expect(errors[0].message).toBe(`'v' is not a valid object`);
         done();
       },
     );

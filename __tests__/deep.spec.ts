@@ -1,7 +1,7 @@
 import Schema from '../src/';
 
 describe('deep', () => {
-  it('deep array specific validation', done => {
+  it('deep array specific validation', (done) => {
     new Schema({
       v: {
         required: true,
@@ -15,15 +15,15 @@ describe('deep', () => {
       {
         v: [1, 'b'],
       },
-      errors => {
+      (errors) => {
         expect(errors.length).toBe(1);
-        expect(errors[0].message).toBe('v.0 is not a string');
+        expect(errors[0].message).toBe("'v.0' is not a valid string");
         done();
       },
     );
   });
 
-  it('deep object specific validation', done => {
+  it('deep object specific validation', (done) => {
     new Schema({
       v: {
         required: true,
@@ -40,16 +40,16 @@ describe('deep', () => {
           b: 'c',
         },
       },
-      errors => {
+      (errors) => {
         expect(errors.length).toBe(1);
-        expect(errors[0].message).toBe('v.a is not a string');
+        expect(errors[0].message).toBe("'v.a' is not a valid string");
         done();
       },
     );
   });
 
   describe('defaultField', () => {
-    it('deep array all values validation', done => {
+    it('deep array all values validation', (done) => {
       new Schema({
         v: {
           required: true,
@@ -60,10 +60,10 @@ describe('deep', () => {
         {
           v: [1, 2, 'c'],
         },
-        errors => {
+        (errors) => {
           expect(errors.length).toBe(2);
-          expect(errors[0].message).toBe('v.0 is not a string');
-          expect(errors[1].message).toBe('v.1 is not a string');
+          expect(errors[0].message).toBe("'v.0' is not a valid string");
+          expect(errors[1].message).toBe("'v.1' is not a valid string");
           done();
         },
       );
@@ -102,12 +102,12 @@ describe('deep', () => {
         },
       };
 
-      new Schema(descriptor).validate(obj, errors => {
+      new Schema(descriptor).validate(obj, (errors) => {
         expect(errors).toMatchSnapshot();
       });
     });
 
-    it('array & required works', done => {
+    it('array & required works', (done) => {
       const descriptor = {
         testArray: {
           type: 'array',
@@ -125,7 +125,7 @@ describe('deep', () => {
       });
     });
 
-    it('deep object all values validation', done => {
+    it('deep object all values validation', (done) => {
       new Schema({
         v: {
           required: true,
@@ -139,9 +139,9 @@ describe('deep', () => {
             b: 'c',
           },
         },
-        errors => {
+        (errors) => {
           expect(errors.length).toBe(1);
-          expect(errors[0].message).toBe('v.a is not a string');
+          expect(errors[0].message).toBe("'v.a' is not a valid string");
           done();
         },
       );

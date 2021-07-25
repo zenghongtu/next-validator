@@ -2,7 +2,7 @@ import Schema from '../src/';
 const required = true;
 
 describe('required', () => {
-  it('works for array required=true', done => {
+  it('works for array required=true', (done) => {
     new Schema({
       v: [
         {
@@ -14,7 +14,7 @@ describe('required', () => {
       {
         v: [],
       },
-      errors => {
+      (errors) => {
         expect(errors.length).toBe(1);
         expect(errors[0].message).toBe('no');
         done();
@@ -22,7 +22,7 @@ describe('required', () => {
     );
   });
 
-  it('works for array required=true & custom message', done => {
+  it('works for array required=true & custom message', (done) => {
     // allow custom message
     new Schema({
       v: [
@@ -35,14 +35,14 @@ describe('required', () => {
       {
         v: [1],
       },
-      errors => {
+      (errors) => {
         expect(errors).toBeFalsy();
         done();
       },
     );
   });
 
-  it('works for array required=false', done => {
+  it('works for array required=false', (done) => {
     new Schema({
       v: {
         required: false,
@@ -51,14 +51,14 @@ describe('required', () => {
       {
         v: [],
       },
-      errors => {
+      (errors) => {
         expect(errors).toBeFalsy();
         done();
       },
     );
   });
 
-  it('works for string required=true', done => {
+  it('works for string required=true', (done) => {
     new Schema({
       v: {
         required,
@@ -67,15 +67,15 @@ describe('required', () => {
       {
         v: '',
       },
-      errors => {
+      (errors) => {
         expect(errors.length).toBe(1);
-        expect(errors[0].message).toBe('v is required');
+        expect(errors[0].message).toBe(`'v' is required`);
         done();
       },
     );
   });
 
-  it('works for string required=false', done => {
+  it('works for string required=false', (done) => {
     new Schema({
       v: {
         required: false,
@@ -84,14 +84,14 @@ describe('required', () => {
       {
         v: '',
       },
-      errors => {
+      (errors) => {
         expect(errors).toBeFalsy();
         done();
       },
     );
   });
 
-  it('works for number required=true', done => {
+  it('works for number required=true', (done) => {
     new Schema({
       v: {
         required,
@@ -100,14 +100,14 @@ describe('required', () => {
       {
         v: 1,
       },
-      errors => {
+      (errors) => {
         expect(errors).toBeFalsy();
         done();
       },
     );
   });
 
-  it('works for number required=false', done => {
+  it('works for number required=false', (done) => {
     new Schema({
       v: {
         required: false,
@@ -116,14 +116,14 @@ describe('required', () => {
       {
         v: 1,
       },
-      errors => {
+      (errors) => {
         expect(errors).toBeFalsy();
         done();
       },
     );
   });
 
-  it('works for null required=true', done => {
+  it('works for null required=true', (done) => {
     new Schema({
       v: {
         required,
@@ -132,15 +132,15 @@ describe('required', () => {
       {
         v: null,
       },
-      errors => {
+      (errors) => {
         expect(errors.length).toBe(1);
-        expect(errors[0].message).toBe('v is required');
+        expect(errors[0].message).toBe(`'v' is required`);
         done();
       },
     );
   });
 
-  it('works for null required=false', done => {
+  it('works for null required=false', (done) => {
     new Schema({
       v: {
         required: false,
@@ -149,14 +149,14 @@ describe('required', () => {
       {
         v: null,
       },
-      errors => {
+      (errors) => {
         expect(errors).toBeFalsy();
         done();
       },
     );
   });
 
-  it('works for undefined required=true', done => {
+  it('works for undefined required=true', (done) => {
     new Schema({
       v: {
         required,
@@ -165,15 +165,15 @@ describe('required', () => {
       {
         v: undefined,
       },
-      errors => {
+      (errors) => {
         expect(errors.length).toBe(1);
-        expect(errors[0].message).toBe('v is required');
+        expect(errors[0].message).toBe(`'v' is required`);
         done();
       },
     );
   });
 
-  it('works for undefined required=false', done => {
+  it('works for undefined required=false', (done) => {
     new Schema({
       v: {
         required: false,
@@ -182,14 +182,14 @@ describe('required', () => {
       {
         v: undefined,
       },
-      errors => {
+      (errors) => {
         expect(errors).toBeFalsy();
         done();
       },
     );
   });
 
-  it('should support empty string message', done => {
+  it('should support empty string message', (done) => {
     new Schema({
       v: {
         required,
@@ -199,7 +199,7 @@ describe('required', () => {
       {
         v: '',
       },
-      errors => {
+      (errors) => {
         expect(errors.length).toBe(1);
         expect(errors[0].message).toBe('');
         done();

@@ -1,7 +1,7 @@
 import Schema from '../src/';
 
 describe('array', () => {
-  it('works for type', done => {
+  it('works for type', (done) => {
     new Schema({
       v: {
         type: 'array',
@@ -10,15 +10,16 @@ describe('array', () => {
       {
         v: '',
       },
-      errors => {
+      (errors) => {
         expect(errors.length).toBe(1);
-        expect(errors[0].message).toBe('v is not an array');
+        console.log('errors: ', errors);
+        expect(errors[0].message).toBe("'v' is not a valid array");
         done();
       },
     );
   });
 
-  it('works for type and required', done => {
+  it('works for type and required', (done) => {
     new Schema({
       v: {
         required: true,
@@ -28,15 +29,15 @@ describe('array', () => {
       {
         v: '',
       },
-      errors => {
+      (errors) => {
         expect(errors.length).toBe(1);
-        expect(errors[0].message).toBe('v is not an array');
+        expect(errors[0].message).toBe("'v' is not a valid array");
         done();
       },
     );
   });
 
-  it('works for none require', done => {
+  it('works for none require', (done) => {
     new Schema({
       v: {
         type: 'array',
@@ -45,14 +46,14 @@ describe('array', () => {
       {
         v: [],
       },
-      errors => {
+      (errors) => {
         expect(errors).toBe(null);
         done();
       },
     );
   });
 
-  it('works for empty array', done => {
+  it('works for empty array', (done) => {
     new Schema({
       v: {
         required: true,
@@ -62,15 +63,15 @@ describe('array', () => {
       {
         v: [],
       },
-      errors => {
+      (errors) => {
         expect(errors.length).toBe(1);
-        expect(errors[0].message).toBe('v is required');
+        expect(errors[0].message).toBe(`'v' is required`);
         done();
       },
     );
   });
 
-  it('works for undefined array', done => {
+  it('works for undefined array', (done) => {
     new Schema({
       v: {
         required: true,
@@ -80,15 +81,15 @@ describe('array', () => {
       {
         v: undefined,
       },
-      errors => {
+      (errors) => {
         expect(errors.length).toBe(1);
-        expect(errors[0].message).toBe('v is required');
+        expect(errors[0].message).toBe(`'v' is required`);
         done();
       },
     );
   });
 
-  it('works for null array', done => {
+  it('works for null array', (done) => {
     new Schema({
       v: {
         required: true,
@@ -98,15 +99,15 @@ describe('array', () => {
       {
         v: null,
       },
-      errors => {
+      (errors) => {
         expect(errors.length).toBe(1);
-        expect(errors[0].message).toBe('v is required');
+        expect(errors[0].message).toBe(`'v' is required`);
         done();
       },
     );
   });
 
-  it('works for none empty', done => {
+  it('works for none empty', (done) => {
     new Schema({
       v: {
         required: true,
@@ -117,14 +118,14 @@ describe('array', () => {
       {
         v: [1],
       },
-      errors => {
+      (errors) => {
         expect(errors).toBe(null);
         done();
       },
     );
   });
 
-  it('works for empty array with min', done => {
+  it('works for empty array with min', (done) => {
     new Schema({
       v: {
         min: 1,
@@ -135,15 +136,15 @@ describe('array', () => {
       {
         v: [],
       },
-      errors => {
+      (errors) => {
         expect(errors.length).toBe(1);
-        expect(errors[0].message).toBe('v must be between 1 and 3 in length');
+        expect(errors[0].message).toBe(`'v' must be between 1 and 3 in length`);
         done();
       },
     );
   });
 
-  it('works for empty array with max', done => {
+  it('works for empty array with max', (done) => {
     new Schema({
       v: {
         min: 1,
@@ -154,9 +155,9 @@ describe('array', () => {
       {
         v: [1, 2, 3, 4],
       },
-      errors => {
+      (errors) => {
         expect(errors.length).toBe(1);
-        expect(errors[0].message).toBe('v must be between 1 and 3 in length');
+        expect(errors[0].message).toBe(`'v' must be between 1 and 3 in length`);
         done();
       },
     );
