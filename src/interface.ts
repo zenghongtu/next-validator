@@ -54,7 +54,7 @@ export interface RuleItem {
   options?: ValidateOption;
   defaultField?: RuleItem; // 'object' or 'array' containing validation rules
   transform?: (value: Value) => Value;
-  message?: string | (() => string);
+  message?: string;
   asyncValidator?: (
     rule: InternalRuleItem,
     value: Value,
