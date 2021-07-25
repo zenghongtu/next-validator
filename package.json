@@ -32,9 +32,6 @@
       "prettier --parser=typescript --write"
     ]
   },
-  "dependencies": {
-    "react": "^16.12.0"
-  },
   "devDependencies": {
     "@umijs/test": "^3.0.5",
     "dumi": "^1.0.16",
