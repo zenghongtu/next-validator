@@ -17,7 +17,7 @@ export class Formatter {
     if (typeof template === 'string') {
       const vars = {
         ...rule,
-        name: rule.field,
+        name: rule.fullField,
         enum: (rule.enum || []).join(', '),
         ...this.messageVariables,
       };
