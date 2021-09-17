@@ -1,6 +1,6 @@
 # next-validator
 
-Forked [GitHub - yiminghe/async-validator: validate form asynchronous](https://github.com/yiminghe/async-validator)
+Forked [GitHub - yiminghe/async-validator: validate form asynchronous](https://github.com/yiminghe/async-validator) and supported message variables. Built-in variables, you can check [here](https://github.com/zenghongtu/next-validator/blob/master/src/messages.ts).
 
 ## Getting Started
 
